@@ -56,21 +56,22 @@ function login(){
 
 function sign(){
   let U = document.getElementById("Name-User").value ;
-  let P = document.getElementById("Email-User").value ;
-  let F = document.getElementById("Password-User").value ;
-
-  console.log(U, P, F);
-
-  // axios.post('http://localhost:3000/account', {
-  //   UserName: A,
-  //   PassWord: 'Last name',
-  //   FullName:'a'
-  // })
-  // .then(function (response) {
-  //   console.log(response);
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
+  let E = document.getElementById("Email-User").value ;
+  let P = document.getElementById("Password-User").value ;
+  console.log(P.length);
+  if(P.length <= 5){
+    alert("XXX Password than 6 character !!");
+  }else{
+    axios.post('http://localhost:3000/account', {
+      UserName: E,
+      PassWord: P,
+      FullName: U
+    })
+    .then(res => {
+      alert("Sign Up Success !")
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
 };
 
