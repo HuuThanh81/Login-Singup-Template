@@ -28,19 +28,49 @@ signupBtn.addEventListener('click', (e) => {
 });
 
 function login(){
-  var Email = [];
-  Email = document.getElementById('email-login').value;
-  var Password = [];
-  Password = document.getElementById('password-login').value;
-  console.clear();
-  console.log(Email, Password);
-  console.log(Password.Lenght);
-
+  axios({
+    method: 'get',
+    url: 'http://localhost:3000/account',
+    data: null
+  }).then(res=>{
+    let find = res.data.find(db => db.UserName === document.getElementById("email-login").value);
+    if(find != undefined){
+      if(find.PassWord == document.getElementById("password-login").value){
+        alert("Họ Tên : " + find.fullName +" ." +
+              "Mã HTTP status : " + res.status +" ." +
+              "Thông điệp HTTP status : " + res.statusText +" ."+
+              "Header : " + res.headers +" ."+
+              "Cấu hình khi thực hiện request : " + res.config +" ."+
+              "request : " + res.request +" ."
+        );
+      } else {
+        alert ("Email or Password is incorrect !!!");
+      }
+    } else {
+      alert ("Unregistered email !!!");
+    }
+  }).catch(err =>{
+    console.log(err);
+  });
 };
 
 function sign(){
-  var Name = document.getElementById('Name-User').value;
-  var Email = document.getElementById('Email-User').value;
-  var Password = document.getElementById('Password-User').value;
-  console.log(Name, Email, Password);
+  let U = document.getElementById("Name-User").value ;
+  let P = document.getElementById("Email-User").value ;
+  let F = document.getElementById("Password-User").value ;
+
+  console.log(U, P, F);
+
+  // axios.post('http://localhost:3000/account', {
+  //   UserName: A,
+  //   PassWord: 'Last name',
+  //   FullName:'a'
+  // })
+  // .then(function (response) {
+  //   console.log(response);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
 };
+

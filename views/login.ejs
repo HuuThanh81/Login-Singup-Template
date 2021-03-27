@@ -31,28 +31,5 @@
         </div>
       </div>
       <script src="./script.js"></script>
-    <script>
-      function login(){
-          axios({
-          method: 'get',
-          url: 'http://localhost:3000/account',
-          data: null
-        }).then(res=>{
-          let find = res.data.find(db => db.UserName === document.getElementById("email-login").value);
-          if(find != undefined){
-            if(find.PassWord == document.getElementById("password-login").value){
-              alert("Họ Tên : " + find.fullName +" .");
-            } else {
-              alert ("Email or Password is incorrect !!!");
-            }
-          } else {
-            alert ("Unregistered email !!!");
-          }
-        }).catch(err =>{
-          console.log(err);
-        });
-      };
-     
-    </script>
 </body>
 </html>
