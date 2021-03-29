@@ -36,6 +36,9 @@ function login(){
     let find = res.data.find(db => db.UserName === document.getElementById("email-login").value);
     if(find != undefined){
       if(find.PassWord == document.getElementById("password-login").value){
+        window.location = "http://localhost:4000/profile"
+        var NameUs = find.fullName;
+        console.log(find);
         alert("Họ Tên : " + find.fullName +" ." +
               "Mã HTTP status : " + res.status +" ." +
               "Thông điệp HTTP status : " + res.statusText +" ."+
@@ -43,6 +46,7 @@ function login(){
               "Cấu hình khi thực hiện request : " + res.config +" ."+
               "request : " + res.request +" ."
         );
+        localStorage.setItem('data', JSON.stringify(find.fullName));
       } else {
         alert ("Email or Password is incorrect !!!");
       }
@@ -65,13 +69,14 @@ function sign(){
     axios.post('http://localhost:3000/account', {
       UserName: E,
       PassWord: P,
-      FullName: U
+      fullName: U
     })
     .then(res => {
+      localStorage.setItem('data', JSON.stringify(U));
+      window.location = "http://localhost:4000/profile"
       alert("Sign Up Success !")
     }).catch(function (error) {
       console.log(error);
     });
   }
 };
-
